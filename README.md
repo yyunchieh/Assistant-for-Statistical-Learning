@@ -20,8 +20,10 @@ The project emphasizes reproducibility, agent-based orchestration, and evaluatio
 ├── graph.py              # LangGraph-based RAG workflow (agent graph definition)
 ├── langgraph.json        # Declarative graph configuration & entry point
 ├── config.py             # Centralized environment & API configuration
-├── .env                  # Environment variables
-└── the Elements of Statistical Learning.pdf   # Knowledge source
+├── .env                  # Environment variables (create by yourself; contains API keys)
+├── the Elements of Statistical Learning.pdf   # Knowledge source
+├── README.md             # Project description & instructions
+└── requirements.txt      # Python dependencies
 ```
 
 ### Workflow
