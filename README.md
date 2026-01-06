@@ -1,6 +1,7 @@
 # Statistical Learning RAG Assistant
 
-A RAG (Retrieval-Augmented Generation) system built with LangGraph for answering questions about "The Elements of Statistical Learning" textbook. Features source citation with page numbers and LangSmith integration for monitoring and evaluation.
+A configuration-driven RAG (Retrieval-Augmented Generation) system built with LangGraph for answering questions about The Elements of Statistical Learning.
+The project emphasizes reproducibility, agent-based orchestration, and evaluation of hallucination behavior.
 
 ## Features
 
@@ -15,19 +16,33 @@ A RAG (Retrieval-Augmented Generation) system built with LangGraph for answering
 
 ### Components
 ```
-├── graph.py              # LangGraph RAG workflow
-├── main.py               # Streamlit UI
-├── config.py             # API key configuration
+├── main.py               # Streamlit UI (user interaction & input handling)
+├── graph.py              # LangGraph-based RAG workflow (agent graph definition)
+├── langgraph.json        # Declarative graph configuration & entry point
+├── config.py             # Centralized environment & API configuration
 ├── .env                  # Environment variables
-└── the Elements of Statistical Learning.pdf
+└── the Elements of Statistical Learning.pdf   # Knowledge source
 ```
 
 ### Workflow
-
 ```
-User Query → Vector Search → Context Retrieval → LLM Generation → Answer + Sources
-                                                                          ↓
-                                                                  Page Numbers + Excerpts
+User Query
+   ↓
+Streamlit UI (main.py)
+   ↓
+LangGraph Runtime
+   ├── Graph Entry (langgraph.json)
+   └── Agent Graph (graph.py)
+           ↓
+     Vector Search
+           ↓
+     Context Retrieval
+           ↓
+     LLM Generation
+           ↓
+ Answer + Sources
+           ↓
+ Page Numbers + Excerpts
 ```
 
 ## Installation
@@ -49,13 +64,13 @@ cd Assistant-for-Statistical-Learning
 ```
 
 2. **Install dependencies:**
-
 ```bash
-pip install langgraph langchain-openai langchain-community langchain-text-splitters faiss-cpu pypdf python-dotenv streamlit langsmith
+pip install -r requirements.txt
 ```
+
 3. **Sign up for LangSmith**
    
--Create an account at [Langsmith](https://smith.langchain.com)
+- Create an account at [Langsmith](https://smith.langchain.com)
 - Generate your API Key
   
 4. **Create `.env` file:**
@@ -76,7 +91,7 @@ LANGSMITH_PROJECT=RAG_assistant_evaluator
 ## Evaluation Setup (LLM-as-a-Judge)
 This project used custom LangSmith Evaluator to detect hallucinations in model outputs.
 
-**Ensure `OPENAI_API_KEY`, `LANGSMITH_API_KEY`, and `LANGSMITH_PROJECT` are correctly set in your `.env` file.
+**Ensure `OPENAI_API_KEY`, `LANGSMITH_API_KEY`, and `LANGSMITH_PROJECT` are correctly set in your `.env` file.**
 
 **Evaluator Prompt**
 ```
